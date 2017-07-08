@@ -2,3 +2,24 @@ img {
 	height:200px;
 	width:200px;
 }
+
+.imageHolder{
+	width:300px;
+	margin-right: 5px;
+	margin-left: 5px;
+	text-align: center;
+}
+
+#gif{
+
+	width:80%;
+}
+
+#form{
+	float:right;
+	background-color: gray;
+}
+
+button {
+	margin-right: 3px;
+}

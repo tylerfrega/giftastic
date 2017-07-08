@@ -1,36 +1,78 @@
 
-
 var apiKey = '6f91a5c2e3274c6eb9d41fbba3ac51cd';
 var animal;
 var animalList = ['cat', 'dog', 'mouse', 'bird', 'frog', 'squid'];
 
 
+
+//generates buttons for each item in animalList array
 for(i=0; i<animalList.length; i++){	
 	$('#buttons').append("<button class= 'btn btn-primary' value =" + animalList[i] + ">"+ animalList[i] + "</button>");
 };
 
 
-
-
-
+//when user clicks button gifs with corresponding animal value displays
 $('button').on('click', function(){
 	animal = $(this).val();
-
 	$('#gif').html('');
+
 
 	$.ajax({
 
 		url: 'https://api.giphy.com/v1/gifs/search?api_key=' + apiKey + '&q='+ animal + '&limit=10&offset=0&rating=G&lang=en',
 		method: 'GET'
 
-
 	}).done(function(response){
 		console.log(response);
 
 		for(i=0; i<response.data.length; i++){
 
-			$('#gif').append("<img src=" + response.data[i].images.original.url + " />");
+			
+			var source = response.data[i].images.original_still.url;
+			var animalDiv = $("<div class='imageHolder col-md-4'>");
+			var h = $('<h4>');
+			var animalImage = $("<img data-state= 'still' data-number= " + i + " class = 'animalGif'>");
+			
+
+			h.html(response.data[i].rating);
+			animalImage.attr('src', source );
+			animalDiv.append(animalImage);
+          	animalDiv.append(h);
+          	$('#gif').prepend(animalDiv);
+
+		    
+
+
+			
+			
 	}
+
+
+	
+
+	    $('img').on('click', function(){
+
+	    	var num = $(this).attr('data-number');
+	    	var state = $(this).attr("data-state");
+	    	var moving = response.data[num].images.original.url;
+	    	var still =  response.data[num].images.original_still.url;
+
+
+	    		if( state === 'still'){
+				
+					$(this).attr('src', moving);
+					$(this).attr("data-state", "animate");
+
+				}else{
+					$(this).attr('src', still);
+					$(this).attr("data-state", "still");
+				}
+
+				});
+
+
 });
 
 });
+
+
