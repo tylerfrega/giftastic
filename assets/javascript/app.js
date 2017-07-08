@@ -7,13 +7,20 @@ var animalList = ['cat', 'dog', 'mouse', 'bird', 'frog', 'squid'];
 
 //generates buttons for each item in animalList array
 for(i=0; i<animalList.length; i++){	
-	$('#buttons').append("<button class= 'btn btn-primary' value =" + animalList[i] + ">"+ animalList[i] + "</button>");
+	$('#buttons').append("<button class= 'animalButton btn btn-primary' value =" + animalList[i] + ">"+ animalList[i] + "</button>");
 };
+
+$('#submit').on('click', function(){
+	var newAnimal = $('input').val();
+		animalList.push(newAnimal);
+		$('#buttons').append("<button class= 'animalButton btn btn-primary' value =" + newAnimal + "> "+ newAnimal + "</button>");
+});
 
 
 //when user clicks button gifs with corresponding animal value displays
-$('button').on('click', function(){
+$('body').on('click','button',  function(){
 	animal = $(this).val();
+	console.log(this);
 	$('#gif').html('');
 
 
@@ -39,16 +46,8 @@ $('button').on('click', function(){
 			animalDiv.append(animalImage);
           	animalDiv.append(h);
           	$('#gif').prepend(animalDiv);
-
-		    
-
-
-			
 			
 	}
-
-
-	
 
 	    $('img').on('click', function(){
 
@@ -74,5 +73,7 @@ $('button').on('click', function(){
 });
 
 });
+
+
 
 

@@ -12,14 +12,15 @@ img {
 
 #gif{
 
-	width:80%;
+	width:65%;
 }
 
 #form{
 	float:right;
-	background-color: gray;
+	
 }
 
 button {
-	margin-right: 3px;
+	margin-right: 5px;
+
 }
